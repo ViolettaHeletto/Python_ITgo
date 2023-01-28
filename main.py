@@ -60,9 +60,7 @@ while is_working:
         if event.type == CREATE_BONUS:
             bonuses.append(creat_bonus())
 
-
     pressed_keys = pygame.key.get_pressed()
-
 
     main_surface.fill((0, 0, 0))
     main_surface.blit(ball, ball_rect)
@@ -86,7 +84,6 @@ while is_working:
 
         if ball_rect.colliderect(bonus[1]):
            bonuses.pop(bonuses.index(bonus))
-
 
     # движение мяча    
     if pressed_keys[K_DOWN] and not ball_rect.bottom >= heigth:
