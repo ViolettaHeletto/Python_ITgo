@@ -37,7 +37,6 @@ def creat_bonus():
     bonus_speed = random.randint(1, 2)
     return [bonus, bonus_rect, bonus_speed]
 
-
 CREATE_ENEMY = pygame.USEREVENT 
 pygame.time.set_timer(CREATE_ENEMY, 1500)
 CREATE_BONUS = pygame.USEREVENT 
