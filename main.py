@@ -33,14 +33,14 @@ def creat_enemy ():
 def creat_bonus():
     bonus = pygame.Surface((20, 20))
     bonus.fill(YELLOW)
-    bonus_rect = pygame.Rect(random.randint(0, width), 0, width, heigth)
+    bonus_rect = pygame.Rect(random.randint(0, width), 0, *bonus.get_size())
     bonus_speed = random.randint(1, 2)
     return [bonus, bonus_rect, bonus_speed]
 
 CREATE_ENEMY = pygame.USEREVENT 
-pygame.time.set_timer(CREATE_ENEMY, 1500)
+pygame.time.set_timer(CREATE_ENEMY, 2500)
 CREATE_BONUS = pygame.USEREVENT 
-pygame.time.set_timer(CREATE_BONUS, 500)
+pygame.time.set_timer(CREATE_BONUS, 1000)
 
 enemies = []
 bonuses = []
@@ -72,7 +72,7 @@ while is_working:
             enemies.pop(enemies.index(enemy))
 
         if ball_rect.colliderect(enemy[1]):
-            enemies.pop(enemies.index(enemy))
+            is_working = False
 
     for bonus in bonuses:
         bonus[1] = bonus[1].move(0, bonus[2])
@@ -83,9 +83,6 @@ while is_working:
 
         if ball_rect.colliderect(bonus[1]):
            bonuses.pop(bonuses.index(bonus))
-
-        if ball_rect.colliderect(bonus[1]):
-            is_working = False
 
     # движение мяча    
     if pressed_keys[K_DOWN] and not ball_rect.bottom >= heigth:
