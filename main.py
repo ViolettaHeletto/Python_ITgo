@@ -84,6 +84,9 @@ while is_working:
         if ball_rect.colliderect(bonus[1]):
            bonuses.pop(bonuses.index(bonus))
 
+        if ball_rect.colliderect(bonus[1]):
+            is_working = False
+
     # движение мяча    
     if pressed_keys[K_DOWN] and not ball_rect.bottom >= heigth:
         ball_rect = ball_rect.move(0, ball_coord)
