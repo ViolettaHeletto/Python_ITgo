@@ -23,6 +23,10 @@ ball.fill(color)
 ball_rect = ball.get_rect()
 ball_coord = 1
 
+font = pygame.font.SysFont('Verdana', 20)
+
+counter = 0 
+
 def creat_enemy ():
     enemy = pygame.Surface((20, 20))
     enemy.fill(RED)
@@ -63,6 +67,7 @@ while is_working:
 
     main_surface.fill((0, 0, 0))
     main_surface.blit(ball, ball_rect)
+    main_surface.blit(font.render(("Score:" + str(counter)), True, YELLOW), (width - 110, 0)) 
 
     for enemy in enemies:
         enemy[1] = enemy[1].move(-enemy[2], 0)
@@ -83,6 +88,7 @@ while is_working:
 
         if ball_rect.colliderect(bonus[1]):
            bonuses.pop(bonuses.index(bonus))
+           counter += 1
 
     # движение мяча    
     if pressed_keys[K_DOWN] and not ball_rect.bottom >= heigth:
