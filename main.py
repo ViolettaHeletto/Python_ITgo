@@ -49,6 +49,12 @@ pygame.time.set_timer(CREATE_BONUS, 1000)
 enemies = []
 bonuses = []
 
+
+
+print("GGHHGFFGFGFHG:", 4, 78, 12, sep="&", end="\n")
+print('second "line')
+
+
 is_working = True
 
 while is_working:
@@ -68,7 +74,7 @@ while is_working:
     main_surface.fill((0, 0, 0))
     main_surface.blit(ball, ball_rect)
     main_surface.blit(font.render(("Score:" + str(counter)), True, YELLOW), (width - 110, 0)) 
-
+    # окончание игры
     for enemy in enemies:
         enemy[1] = enemy[1].move(-enemy[2], 0)
         main_surface.blit(enemy[0], enemy[1])
@@ -85,7 +91,7 @@ while is_working:
 
         if bonus[1].bottom <= 0:
            bonuses.pop(bonuses.index(bonus))
-
+    # cчет
         if ball_rect.colliderect(bonus[1]):
            bonuses.pop(bonuses.index(bonus))
            counter += 1
@@ -102,5 +108,8 @@ while is_working:
 
     if pressed_keys[K_LEFT] and not ball_rect.left <= 0:
         ball_rect = ball_rect.move(-ball_coord, 0) 
+
+   
     
     pygame.display.flip()
+
