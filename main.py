@@ -53,6 +53,13 @@ bonuses = []
 
 print("GGHHGFFGFGFHG:", 4, 78, 12, sep="&", end="\n")
 print('second "line')
+print(10 + 10)
+print(10 - 5)
+print(7 ** 7)
+print(10 // 4 )
+print(min(67, 100, -98, -3))
+print(max(67, 100, -98, -3))
+print(abs(-98))
 
 
 is_working = True
