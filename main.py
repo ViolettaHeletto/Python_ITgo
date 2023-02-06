@@ -7,7 +7,7 @@ pygame.init()
 
 FPS = pygame.time.Clock()
 
-screen = width, heigth = 800, 600
+screen = width, heigth = 920, 800
 
 BLACK = 0, 0, 0
 RED = 255, 0, 0
@@ -17,11 +17,12 @@ YELLOW = 255,255,0
 WHITE = 255, 255, 255
 
 main_surface = pygame.display.set_mode(screen)
-ball = pygame.Surface((20, 20))
-color = GREEN
-ball.fill(color)
+bg = pygame.transform.scale(pygame.image.load('background.png').convert(), screen)
+
+ball = pygame.image.load('player.png').convert_alpha()
 ball_rect = ball.get_rect()
 ball_coord = 1
+
 
 font = pygame.font.SysFont('Verdana', 20)
 
@@ -30,14 +31,14 @@ counter = 0
 def creat_enemy ():
     enemy = pygame.Surface((20, 20))
     enemy.fill(RED)
+    enemy = pygame.image.load('enemy.png').convert_alpha()
     enemy_rect = pygame.Rect(width, random.randint(0, heigth), *enemy.get_size())
     enemy_speed = random.randint(1, 4)
     return [enemy, enemy_rect, enemy_speed]
 
 def creat_bonus():
-    bonus = pygame.Surface((20, 20))
-    bonus.fill(YELLOW)
-    bonus_rect = pygame.Rect(random.randint(0, width), 0, *bonus.get_size())
+    bonus = pygame.image.load('bonus.png').convert_alpha()
+    bonus_rect = pygame.Rect(random.randint(0, width - 30), 0, *bonus.get_size())
     bonus_speed = random.randint(1, 2)
     return [bonus, bonus_rect, bonus_speed]
 
@@ -78,7 +79,8 @@ while is_working:
 
     pressed_keys = pygame.key.get_pressed()
 
-    main_surface.fill((0, 0, 0))
+    #main_surface.fill(BLACK)
+    main_surface.blit(bg, (0, 0))
     main_surface.blit(ball, ball_rect)
     main_surface.blit(font.render(("Score:" + str(counter)), True, YELLOW), (width - 110, 0)) 
     # окончание игры
