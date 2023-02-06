@@ -23,6 +23,10 @@ ball.fill(color)
 ball_rect = ball.get_rect()
 ball_coord = 1
 
+font = pygame.font.SysFont('Verdana', 20)
+
+counter = 0 
+
 def creat_enemy ():
     enemy = pygame.Surface((20, 20))
     enemy.fill(RED)
@@ -33,17 +37,30 @@ def creat_enemy ():
 def creat_bonus():
     bonus = pygame.Surface((20, 20))
     bonus.fill(YELLOW)
-    bonus_rect = pygame.Rect(random.randint(0, width), 0, width, heigth)
+    bonus_rect = pygame.Rect(random.randint(0, width), 0, *bonus.get_size())
     bonus_speed = random.randint(1, 2)
     return [bonus, bonus_rect, bonus_speed]
 
 CREATE_ENEMY = pygame.USEREVENT 
-pygame.time.set_timer(CREATE_ENEMY, 1500)
+pygame.time.set_timer(CREATE_ENEMY, 2500)
 CREATE_BONUS = pygame.USEREVENT 
-pygame.time.set_timer(CREATE_BONUS, 500)
+pygame.time.set_timer(CREATE_BONUS, 1000)
 
 enemies = []
 bonuses = []
+
+
+
+print("GGHHGFFGFGFHG:", 4, 78, 12, sep="&", end="\n")
+print('second "line')
+print(10 + 10)
+print(10 - 5)
+print(7 ** 7)
+print(10 // 4 )
+print(min(67, 100, -98, -3))
+print(max(67, 100, -98, -3))
+print(abs(-98))
+
 
 is_working = True
 
@@ -63,7 +80,8 @@ while is_working:
 
     main_surface.fill((0, 0, 0))
     main_surface.blit(ball, ball_rect)
-
+    main_surface.blit(font.render(("Score:" + str(counter)), True, YELLOW), (width - 110, 0)) 
+    # окончание игры
     for enemy in enemies:
         enemy[1] = enemy[1].move(-enemy[2], 0)
         main_surface.blit(enemy[0], enemy[1])
@@ -72,7 +90,7 @@ while is_working:
             enemies.pop(enemies.index(enemy))
 
         if ball_rect.colliderect(enemy[1]):
-            enemies.pop(enemies.index(enemy))
+            is_working = False
 
     for bonus in bonuses:
         bonus[1] = bonus[1].move(0, bonus[2])
@@ -80,9 +98,10 @@ while is_working:
 
         if bonus[1].bottom <= 0:
            bonuses.pop(bonuses.index(bonus))
-
+    # cчет
         if ball_rect.colliderect(bonus[1]):
            bonuses.pop(bonuses.index(bonus))
+           counter += 1
 
     # движение мяча    
     if pressed_keys[K_DOWN] and not ball_rect.bottom >= heigth:
@@ -96,5 +115,8 @@ while is_working:
 
     if pressed_keys[K_LEFT] and not ball_rect.left <= 0:
         ball_rect = ball_rect.move(-ball_coord, 0) 
+
+   
     
     pygame.display.flip()
+
